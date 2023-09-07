@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "func_elia_instagram_api": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7054",
+      "launchBrowser": false
+    }
+  }
+}
