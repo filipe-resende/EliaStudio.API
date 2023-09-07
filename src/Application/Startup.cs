@@ -15,6 +15,7 @@ namespace Application
         {
             builder.Services.AddScoped<IGraphService, GraphService>();
             builder.Services.AddScoped<IGraphRepository, GraphyRepository>();
+            builder.Services.AddScoped<IEmailSenderService, EmailSenderService>();
 
             IConfiguration configuration = new ConfigurationBuilder()
              .SetBasePath(Environment.CurrentDirectory)
@@ -27,7 +28,8 @@ namespace Application
             builder.Services.AddHttpClient();
             builder.Services.AddHttpClient("graph", client =>
             {
-                client.BaseAddress = new Uri(configuration["GRAPH_APP_URL"]);
+                var baseUrl = configuration["GRAPH_APP_URL"];
+                client.BaseAddress = new Uri(baseUrl);
             });
         }
 
