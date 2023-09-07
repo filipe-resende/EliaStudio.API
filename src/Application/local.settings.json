@@ -1,0 +1,14 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "GRAPH_APP_URL": "https://graph.instagram.com",
+    "GRAPH_APP_TOKEN": "IGQVJYOWZAoN1VzdWE1Mk1KTnhZAV3AtTS1EVS1POWRYdGpSN0dndUhYWk1LeUVlZAkRfeDY5VnZACTURCNGN1RzVwbkVpLTRnU2NNQktrVjhRWEVHZAW1pS0ZAEWHIyRmRmbUxHVWF1QURLR3ZAIeklnU245MwZDZD",
+    "AzureWebJobs_Swagger_SwaggerEndpoint": "/api/swagger/v1/swagger.json"
+  },
+  "Host": {
+    "LocalHttpPort": 7071,
+    "CORS": "*"
+  }
+}
