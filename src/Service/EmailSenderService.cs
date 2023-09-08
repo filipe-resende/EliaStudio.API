@@ -44,9 +44,10 @@ namespace Service
                 $"Indicação:<strong> {(clientInfo.indicacao ? "Sim" : "Não")}</strong><br>\n" +
                 $"Visitei um projeto assinado por vocês:<strong> {(clientInfo.visitei ? "Sim" : "Não")}</strong><br>\n" +
                 $"Outros:<strong> {(clientInfo.outros ? "Sim" : "Não")}</strong><br>\n" +
-                $"Telefone:<strong> {clientInfo.metros_imoveis} </strong><br>\n" +
-                $"Endereco:<strong> {clientInfo.seu_objetivo}</strong><br>\n",
-                attachments: new List<string> { "filipedecastroresende@gmail.com" });
+                $"Quantos metros tem o imóvel: {clientInfo.metros_imoveis} </strong><br>\n" +
+                $"Em caso de projetos interiores - para quais ambientes seria o projeto: <strong> {clientInfo.quais_ambientes}</strong><br>\n"+
+                $"Nos conte mais sobre seu objetivo: <strong> {clientInfo.seu_objetivo}</strong><br>\n",
+                clientInfo.files);
             }
             catch(Exception e) 
             {

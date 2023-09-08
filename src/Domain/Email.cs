@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Microsoft.AspNetCore.Http;
+using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Text.RegularExpressions;
@@ -18,13 +19,13 @@ namespace Domain
             Password = password ?? throw new ArgumentNullException(nameof(password));
         }
 
-        public void SendEmail(List<string> emailsTo, string subject, string body, List<string> attachments)
+        public void SendEmail(List<string> emailsTo, string subject, string body, IFormFileCollection files)
         {
-            var message = PrepareteMessage(emailsTo, subject, body, attachments);
+            var message = PrepareteMessage(emailsTo, subject, body, files);
             SendEmailBySmtp(message);
         }
 
-        private MailMessage PrepareteMessage(List<string> emailsTo, string subject, string body, List<string> attachments)
+        private MailMessage PrepareteMessage(List<string> emailsTo, string subject, string body, IFormFileCollection files)
         {
             var mail = new MailMessage();
             mail.From = new MailAddress(Username);
@@ -41,16 +42,18 @@ namespace Domain
             mail.Body = body;
             mail.IsBodyHtml = true;
 
-            //foreach (var file in attachments)
-            //{
-            //    var data = new Attachment(file, MediaTypeNames.Application.Octet);
-            //    ContentDisposition disposition = data.ContentDisposition;
-            //    disposition.CreationDate = System.IO.File.GetCreationTime(file);
-            //    disposition.ModificationDate = System.IO.File.GetLastWriteTime(file);
-            //    disposition.ReadDate = System.IO.File.GetLastAccessTime(file);
+            foreach (var file in files)
+            {
+                var content = new MemoryStream();
+                file.CopyTo(content);
+                content.Position = 0;
 
-            //    mail.Attachments.Add(data);
-            //}
+                var data = new Attachment(content, new ContentType(file.ContentType));
+                ContentDisposition disposition = data.ContentDisposition;
+                disposition.FileName = file.FileName;
+
+                mail.Attachments.Add(data);
+            }
 
             return mail;
         }

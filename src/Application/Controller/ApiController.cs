@@ -36,10 +36,9 @@ namespace Application.Controller
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var clientInfo = JsonConvert.DeserializeObject<ClientInfo>(requestBody);
+            var info = new ClientInfo(req);
 
-            _emailSenderService.EmailSender(clientInfo);
+            _emailSenderService.EmailSender(info);
 
             return new OkObjectResult("Email enviado!");
         }
