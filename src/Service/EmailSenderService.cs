@@ -22,7 +22,7 @@ namespace Service
                 password: _configuration["PASSWORD_MAIL"]);
 
                 outlook.SendEmail(
-                emailsTo: new List<string> { "filipedecastroresende@gmail.com" },
+                emailsTo: new List<string> { _configuration["EMAIL_RECEIVER"] },
                 subject: $"[ORÇAMENTO] {clientInfo.nome} - {DateTime.Now}",
                 body:
                 $"Nome: <strong>{clientInfo.nome}</strong> <br>\n" +

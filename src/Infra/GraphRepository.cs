@@ -19,7 +19,7 @@ namespace Repository
         {
             string token = _configuration["GRAPH_APP_TOKEN"]!; 
 
-            var response = await _cliente.GetAsync($"/me/media?fields=media_url,permalink,media_type&limit={10}&access_token={token}");
+            var response = await _cliente.GetAsync($"/me/media?fields=media_url,permalink,media_type&limit={11}&access_token={token}");
             
             response.EnsureSuccessStatusCode();
 
